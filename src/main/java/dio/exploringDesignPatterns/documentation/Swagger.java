@@ -9,7 +9,7 @@ import io.swagger.v3.oas.models.info.Info;
 @Configuration
 public class Swagger {
     @Bean
-    public OpenAPI springShopOpenAPI() {
+    public OpenAPI api() {
         return new OpenAPI()
                 .info(new Info()
                     .title("Exploring Design Patterns API")
