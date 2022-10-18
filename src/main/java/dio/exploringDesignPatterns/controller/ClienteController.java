@@ -22,8 +22,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 
-@RestController
+@Tags(value = {
+    @Tag(name = "Clientes")
+})
+@RestController()
 @RequestMapping("/clientes")
 public class ClienteController {
   @Autowired
