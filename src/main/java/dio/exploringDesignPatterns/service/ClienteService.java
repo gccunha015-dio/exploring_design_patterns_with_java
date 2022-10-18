@@ -8,6 +8,7 @@ import dio.exploringDesignPatterns.model.Cliente;
 import dio.exploringDesignPatterns.model.Endereco;
 import dio.exploringDesignPatterns.repository.ClienteRepository;
 import dio.exploringDesignPatterns.repository.EnderecoRepository;
+import feign.FeignException;
 
 /*
  * This class uses the Facade Design Pattern to simplify interaction
@@ -39,7 +40,9 @@ public class ClienteService implements IClienteService {
   }
 
   @Override
-  public Cliente update(Cliente cliente) {
+  public Cliente update(long id, Cliente cliente) {
+    Cliente clienteASerAtualizado = readById(id);
+    cliente.setId(clienteASerAtualizado.getId());
     return _saveClienteWithEndereco(cliente);
   }
 
@@ -55,7 +58,7 @@ public class ClienteService implements IClienteService {
         Endereco enderecoRead = _viaCepService.readByCep(cep);
         _enderecoRepository.save(enderecoRead);
         return enderecoRead;
-      } catch (Exception __) {
+      } catch (FeignException __) {
         throw new InvalidCepException();
       }
     });
